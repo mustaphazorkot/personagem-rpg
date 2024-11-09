@@ -22,11 +22,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class Raca {
-    
-    public interface CreateRaca{}
+
+    public interface CreateRaca {
+    }
 
     public static final String TABLE_NAME = "raca";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)

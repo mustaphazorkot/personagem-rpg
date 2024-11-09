@@ -31,27 +31,29 @@ import lombok.Setter;
 @EqualsAndHashCode
 
 public class Usuario {
-    
-    public interface CreateUsuario {}
-    public interface UpdateUsuario {}
 
+    public interface CreateUsuario {
+    }
+
+    public interface UpdateUsuario {
+    }
 
     public static final String TABLE_NAME = "usuario";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id", unique = true)
+    @Column(name = "id", unique = true)
     private Long id;
 
     @Column(name = "email", length = 100, nullable = false, unique = true)
-    @NotBlank(groups = {CreateUsuario.class, UpdateUsuario.class})
-    @Size(groups = {CreateUsuario.class, UpdateUsuario.class}, min = 2, max = 100)
+    @NotBlank(groups = { CreateUsuario.class, UpdateUsuario.class })
+    @Size(groups = { CreateUsuario.class, UpdateUsuario.class }, min = 2, max = 100)
     private String email;
 
     @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "senha", length = 100, nullable = false)
-    @NotBlank(groups = {CreateUsuario.class, UpdateUsuario.class})
-    @Size(groups = {CreateUsuario.class, UpdateUsuario.class}, min = 3, max = 255)
+    @NotBlank(groups = { CreateUsuario.class, UpdateUsuario.class })
+    @Size(groups = { CreateUsuario.class, UpdateUsuario.class }, min = 3, max = 255)
     private String senha;
 
     @Column(name = "nome", length = 100, nullable = false)
@@ -64,7 +66,7 @@ public class Usuario {
     @Size(groups = CreateUsuario.class, min = 2, max = 100)
     private String apelido;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Personagem> personagens = new ArrayList<Personagem>();
 
 }

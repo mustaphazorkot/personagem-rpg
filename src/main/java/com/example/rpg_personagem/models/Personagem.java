@@ -41,15 +41,15 @@ public class Personagem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false, updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "id_classe")
+    @JoinColumn(name = "classe_id")
     private Classe classe;
 
     @ManyToOne
-    @JoinColumn(name = "id_raca")
+    @JoinColumn(name = "raca_id")
     private Raca raca;
 
     @Column(name = "nome")

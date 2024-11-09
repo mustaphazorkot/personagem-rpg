@@ -23,10 +23,11 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Classe {
 
-    public interface CreateClasse{}
+    public interface CreateClasse {
+    }
 
     public static final String TABLE_NAME = "classe";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)

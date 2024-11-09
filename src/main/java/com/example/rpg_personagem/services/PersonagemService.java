@@ -24,7 +24,7 @@ public class PersonagemService {
     @Autowired
     private ClasseService classeService;
 
-    private Personagem findById(Long id) {
+    public Personagem findById(Long id) {
         Optional<Personagem> personagem = this.personagemRepository.findById(id);
         return personagem.orElseThrow(() -> new RuntimeException(
                 "Personagem não encontrado! Id:" + id + ", Tipo: " + Personagem.class.getName()));
@@ -47,14 +47,15 @@ public class PersonagemService {
     @Transactional
     public Personagem update(Personagem obj) {
         Personagem newObj = findById(obj.getId());
+        newObj.setNome(obj.getNome());
         newObj.setForca(obj.getForca());
         newObj.setDestreza(obj.getDestreza());
         newObj.setConstituicao(obj.getConstituicao());
         newObj.setInteligencia(obj.getInteligencia());
         newObj.setSabedoria(obj.getSabedoria());
         newObj.setCarisma(obj.getCarisma());
-
-        return this.personagemRepository.save(newObj);
+        newObj = this.personagemRepository.save(newObj);
+        return newObj;
     }
 
     public void delete(Long id) {

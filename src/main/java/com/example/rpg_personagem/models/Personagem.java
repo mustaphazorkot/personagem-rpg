@@ -45,11 +45,11 @@ public class Personagem {
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "classe_id")
+    @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;
 
     @ManyToOne
-    @JoinColumn(name = "raca_id")
+    @JoinColumn(name = "raca_id", nullable = false)
     private Raca raca;
 
     @Column(name = "nome")
@@ -59,32 +59,22 @@ public class Personagem {
 
     @Column(name = "forca")
     @Min(1)
-    @Max(2)
+    @Max(20)
     private int forca;
 
     @Column(name = "destreza")
-    @Min(1)
-    @Max(2)
     private int destreza;
 
     @Column(name = "constituicao")
-    @Min(1)
-    @Max(2)
     private int constituicao;
 
     @Column(name = "inteligencia")
-    @Min(1)
-    @Max(2)
     private int inteligencia;
 
     @Column(name = "sabedoria")
-    @Min(1)
-    @Max(2)
     private int sabedoria;
 
     @Column(name = "carisma")
-    @Min(1)
-    @Max(2)
     private int carisma;
 
 }

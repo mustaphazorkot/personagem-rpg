@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = Raca.TABLE_NAME)
+@Table(name = Classe.TABLE_NAME)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

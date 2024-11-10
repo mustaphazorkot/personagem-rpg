@@ -39,6 +39,26 @@ public class PersonagemService {
         obj.setUsuario(usuario);
         obj.setClasse(classe);
         obj.setRaca(raca);
+
+        if (obj.getForca() == 0) {
+            obj.setForca(8);
+        }
+        if (obj.getDestreza() == 0) {
+            obj.setDestreza(8);
+        }
+        if (obj.getConstituicao() == 0) {
+            obj.setConstituicao(8);
+        }
+        if (obj.getInteligencia() == 0) {
+            obj.setInteligencia(8);
+        }
+        if (obj.getSabedoria() == 0) {
+            obj.setSabedoria(8);
+        }
+        if (obj.getCarisma() == 0) {
+            obj.setCarisma(8);
+        }
+
         obj = this.personagemRepository.save(obj);
         return obj;
 

@@ -29,6 +29,12 @@ public class RacaController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @GetMapping
+    public ResponseEntity<Iterable<Raca>> findAll() {
+        Iterable<Raca> raca = this.racaService.findAll();
+        return ResponseEntity.ok().body(raca);
+    }
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody Raca obj) {
         this.racaService.create(obj);

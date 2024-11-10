@@ -21,6 +21,11 @@ public class RacaService {
                 "Classe não encontrada! Id: " + id + ", Tipo: " + Raca.class.getName()));
     }
 
+    public Iterable<Raca> findAll(){
+        Iterable<Raca> raca = this.racaRepository.findAll();
+        return raca;
+    }
+
     @Transactional
     public Raca create(Raca obj) {
         obj.setId(null);

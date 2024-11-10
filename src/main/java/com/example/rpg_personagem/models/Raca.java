@@ -3,6 +3,9 @@ package com.example.rpg_personagem.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,5 +46,6 @@ public class Raca {
     private String nome;
 
     @OneToMany(mappedBy = "raca")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private List<Personagem> raca = new ArrayList<Personagem>();
 }

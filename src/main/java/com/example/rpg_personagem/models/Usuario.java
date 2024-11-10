@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -66,7 +65,8 @@ public class Usuario {
     @Size(groups = CreateUsuario.class, min = 2, max = 100)
     private String apelido;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private List<Personagem> personagens = new ArrayList<Personagem>();
 
 }

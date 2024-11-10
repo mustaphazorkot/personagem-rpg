@@ -30,6 +30,11 @@ public class PersonagemService {
                 "Personagem não encontrado! Id:" + id + ", Tipo: " + Personagem.class.getName()));
     }
 
+    public Iterable<Personagem> findAll(){
+        Iterable<Personagem> personagem = this.personagemRepository.findAll();
+        return personagem;
+    }
+
     @Transactional
     public Personagem create(Personagem obj) {
         Usuario usuario = this.usuarioService.findById(obj.getUsuario().getId());
@@ -40,24 +45,12 @@ public class PersonagemService {
         obj.setClasse(classe);
         obj.setRaca(raca);
 
-        if (obj.getForca() == 0) {
-            obj.setForca(8);
-        }
-        if (obj.getDestreza() == 0) {
-            obj.setDestreza(8);
-        }
-        if (obj.getConstituicao() == 0) {
-            obj.setConstituicao(8);
-        }
-        if (obj.getInteligencia() == 0) {
-            obj.setInteligencia(8);
-        }
-        if (obj.getSabedoria() == 0) {
-            obj.setSabedoria(8);
-        }
-        if (obj.getCarisma() == 0) {
-            obj.setCarisma(8);
-        }
+        obj.setForca(obj.getForca() != null ? obj.getForca() : 0);
+        obj.setDestreza(obj.getDestreza() != null ? obj.getDestreza() : 0);
+        obj.setConstituicao(obj.getConstituicao() != null ? obj.getConstituicao() : 0);
+        obj.setInteligencia(obj.getInteligencia() != null ? obj.getInteligencia() : 0);
+        obj.setSabedoria(obj.getSabedoria() != null ? obj.getSabedoria() : 0);
+        obj.setCarisma(obj.getCarisma() != null ? obj.getCarisma() : 0);
 
         obj = this.personagemRepository.save(obj);
         return obj;
@@ -67,13 +60,34 @@ public class PersonagemService {
     @Transactional
     public Personagem update(Personagem obj) {
         Personagem newObj = findById(obj.getId());
-        newObj.setNome(obj.getNome());
-        newObj.setForca(obj.getForca());
-        newObj.setDestreza(obj.getDestreza());
-        newObj.setConstituicao(obj.getConstituicao());
-        newObj.setInteligencia(obj.getInteligencia());
-        newObj.setSabedoria(obj.getSabedoria());
-        newObj.setCarisma(obj.getCarisma());
+
+        if (obj.getNome() == null) {
+            newObj.setNome(obj.getNome());
+        }
+
+        if (obj.getForca() != null) {
+            newObj.setForca(obj.getForca());
+        }
+
+        if (obj.getDestreza() != null) {
+            newObj.setDestreza(obj.getDestreza());
+        }
+
+        if (obj.getConstituicao() != null) {
+            newObj.setConstituicao(obj.getConstituicao());
+        }
+
+        if (obj.getInteligencia() != null) {
+            newObj.setInteligencia(obj.getInteligencia());
+        }
+
+        if (obj.getSabedoria() != null) {
+            newObj.setSabedoria(obj.getSabedoria());
+        }
+
+        if (obj.getCarisma() != null) {
+            newObj.setCarisma(obj.getCarisma());
+        }
         newObj = this.personagemRepository.save(newObj);
         return newObj;
     }

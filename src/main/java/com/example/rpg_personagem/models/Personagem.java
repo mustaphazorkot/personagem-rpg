@@ -1,5 +1,6 @@
 package com.example.rpg_personagem.models;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,8 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -58,23 +58,21 @@ public class Personagem {
     private String nome;
 
     @Column(name = "forca")
-    @Min(1)
-    @Max(20)
-    private int forca;
+    private Integer forca;
 
     @Column(name = "destreza")
-    private int destreza;
+    private Integer destreza;
 
     @Column(name = "constituicao")
-    private int constituicao;
+    private Integer constituicao;
 
     @Column(name = "inteligencia")
-    private int inteligencia;
+    private Integer inteligencia;
 
     @Column(name = "sabedoria")
-    private int sabedoria;
+    private Integer sabedoria;
 
     @Column(name = "carisma")
-    private int carisma;
+    private Integer carisma;
 
 }

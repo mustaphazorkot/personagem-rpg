@@ -25,6 +25,11 @@ public class UsuarioService {
                 "Usuário não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
     }
 
+    public Iterable<Usuario> findAll(){
+        Iterable<Usuario> usuario = this.usuarioRepository.findAll();
+        return usuario;
+    }
+
     @Transactional
     public Usuario create(Usuario obj) {
         obj.setId(null);

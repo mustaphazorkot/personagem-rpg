@@ -29,6 +29,12 @@ public class ClasseController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @GetMapping
+    public ResponseEntity<Iterable<Classe>> findAll(){
+        Iterable<Classe> classe = this.classeService.findAll();
+        return ResponseEntity.ok().body(classe);
+    }
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody Classe obj) {
         this.classeService.create(obj);

@@ -21,6 +21,11 @@ public class ClasseService {
                 "Classe não encontrada! Id: " + id + ", Tipo: " + Classe.class.getName()));
     }
 
+    public Iterable<Classe> findAll(){
+        Iterable<Classe> classe = this.classeRepository.findAll();
+        return classe;
+    }
+
     @Transactional
     public Classe create(Classe obj) {
         obj.setId(null);

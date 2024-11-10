@@ -37,6 +37,12 @@ public class PersonagemController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @GetMapping
+    public ResponseEntity<Iterable<Personagem>> findAll(){
+        Iterable<Personagem> personagem = this.personagemService.findAll();
+        return ResponseEntity.ok().body(personagem);
+    }
+
     @PostMapping
     @Validated(CreatePersonagem.class)
     public ResponseEntity<Void> create(@Valid @RequestBody Personagem obj) {

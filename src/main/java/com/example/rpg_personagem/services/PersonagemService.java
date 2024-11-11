@@ -11,6 +11,7 @@ import com.example.rpg_personagem.models.Classe;
 import com.example.rpg_personagem.models.Personagem;
 import com.example.rpg_personagem.models.Raca;
 import com.example.rpg_personagem.repositories.PersonagemRepository;
+import com.example.rpg_personagem.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PersonagemService {
@@ -26,7 +27,7 @@ public class PersonagemService {
 
     public Personagem findById(Long id) {
         Optional<Personagem> personagem = this.personagemRepository.findById(id);
-        return personagem.orElseThrow(() -> new RuntimeException(
+        return personagem.orElseThrow(() -> new ObjectNotFoundException(
                 "Personagem não encontrado! Id:" + id + ", Tipo: " + Personagem.class.getName()));
     }
 

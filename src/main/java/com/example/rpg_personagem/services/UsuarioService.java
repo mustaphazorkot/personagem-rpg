@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.rpg_personagem.models.Usuario;
 import com.example.rpg_personagem.repositories.PersonagemRepository;
 import com.example.rpg_personagem.repositories.UsuarioRepository;
+import com.example.rpg_personagem.services.exceptions.DataBidingViolationException;
+import com.example.rpg_personagem.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
@@ -21,11 +23,11 @@ public class UsuarioService {
 
     public Usuario findById(Long id) {
         Optional<Usuario> user = this.usuarioRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException(
+        return user.orElseThrow(() -> new ObjectNotFoundException(
                 "Usuário não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
     }
 
-    public Iterable<Usuario> findAll(){
+    public Iterable<Usuario> findAll() {
         Iterable<Usuario> usuario = this.usuarioRepository.findAll();
         return usuario;
     }
@@ -48,6 +50,10 @@ public class UsuarioService {
 
     public void delete(Long id) {
         findById(id);
-        this.usuarioRepository.deleteById(id);
+        try {
+            this.usuarioRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new DataBidingViolationException("Não é possível excluir pois exitem entidades relacionadas!");
+        }
     }
 }

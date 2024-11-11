@@ -35,6 +35,11 @@ public class PersonagemService {
         return personagem;
     }
 
+    public Iterable<Personagem> findAllByUserId(Long userId){
+        Iterable<Personagem> personagens = this.personagemRepository.findByUsuarioId(userId);
+        return personagens;
+    }
+
     @Transactional
     public Personagem create(Personagem obj) {
         Usuario usuario = this.usuarioService.findById(obj.getUsuario().getId());

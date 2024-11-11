@@ -38,9 +38,15 @@ public class PersonagemController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Personagem>> findAll(){
-        Iterable<Personagem> personagem = this.personagemService.findAll();
-        return ResponseEntity.ok().body(personagem);
+    public ResponseEntity<Iterable<Personagem>> findAll() {
+        Iterable<Personagem> personagens = this.personagemService.findAll();
+        return ResponseEntity.ok().body(personagens);
+    }
+
+    @GetMapping("/usuario/{user_id}")
+    public ResponseEntity<Iterable<Personagem>> findAllByUser(@PathVariable Long user_id) {
+        Iterable<Personagem> personagens = this.personagemService.findAllByUserId(user_id);
+        return ResponseEntity.ok().body(personagens);
     }
 
     @PostMapping

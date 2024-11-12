@@ -1,13 +1,16 @@
 package com.example.rpg_personagem.services;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.rpg_personagem.models.Usuario;
-import com.example.rpg_personagem.repositories.PersonagemRepository;
+import com.example.rpg_personagem.models.enuns.PerfilEnun;
 import com.example.rpg_personagem.repositories.UsuarioRepository;
 import com.example.rpg_personagem.services.exceptions.DataBidingViolationException;
 import com.example.rpg_personagem.services.exceptions.ObjectNotFoundException;
@@ -19,7 +22,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private PersonagemRepository personagemRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Usuario findById(Long id) {
         Optional<Usuario> user = this.usuarioRepository.findById(id);
@@ -35,8 +38,9 @@ public class UsuarioService {
     @Transactional
     public Usuario create(Usuario obj) {
         obj.setId(null);
+        obj.setSenha(this.bCryptPasswordEncoder.encode(obj.getSenha()));
+        obj.setPerfis(Stream.of(PerfilEnun.USER.getCode()).collect(Collectors.toSet()));
         obj = this.usuarioRepository.save(obj);
-        this.personagemRepository.saveAll(obj.getPersonagens());
         return obj;
     }
 
@@ -44,7 +48,7 @@ public class UsuarioService {
     public Usuario update(Usuario obj) {
         Usuario newObj = findById(obj.getId());
         newObj.setEmail(obj.getEmail());
-        newObj.setSenha(obj.getSenha());
+        newObj.setSenha(this.bCryptPasswordEncoder.encode(obj.getSenha()));
         return this.usuarioRepository.save(newObj);
     }
 

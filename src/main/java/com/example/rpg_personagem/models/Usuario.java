@@ -1,13 +1,20 @@
 package com.example.rpg_personagem.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.example.rpg_personagem.models.enuns.PerfilEnun;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -69,4 +76,17 @@ public class Usuario {
     @JsonProperty(access = Access.WRITE_ONLY)
     private List<Personagem> personagens = new ArrayList<Personagem>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @CollectionTable(name = "perfil_usuario")
+    @Column(name = "perfil", nullable = false)
+    private Set<Integer> perfis = new HashSet<>();
+
+    public Set<PerfilEnun> getPerfis(){
+        return this.perfis.stream().map(x -> PerfilEnun.toEnun(x)).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(PerfilEnun perfilEnun){
+        this.perfis.add(perfilEnun.getCode());
+    }
 }
